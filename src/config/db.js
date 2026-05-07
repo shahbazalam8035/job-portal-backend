@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const { Pool } = require('pg');
+import mongoose from 'mongoose';
+import { Pool } from 'pg';
 
 const connectMongo = async () => {
   try {
@@ -12,6 +12,9 @@ const connectMongo = async () => {
 
 const pool = new Pool({
   connectionString: process.env.POSTGRES_URI,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
 
 const connectPostgres = async () => {
@@ -19,8 +22,8 @@ const connectPostgres = async () => {
     await pool.connect();
     console.log('PostgreSQL Connected');
   } catch (err) {
-    console.error('PostgreSQL Connection Error:', err.message);
+    console.error('PostgreSQL Connection Error:', err);
   }
 };
 
-module.exports = { connectMongo, connectPostgres, pool };
+export { connectMongo, connectPostgres, pool };
