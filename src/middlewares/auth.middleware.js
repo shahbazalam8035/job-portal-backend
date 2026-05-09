@@ -7,7 +7,6 @@ const authGuard = async (req, res, next) => {
     }
 
     try {     
-        console.log(process.env.SECRET_KEY)
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         req.user = decoded;
         next()
