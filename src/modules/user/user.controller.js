@@ -1,6 +1,7 @@
-import { registerUser } from "./user.service.js";
+import { loginUser, registerUser } from "./user.service.js";
 
 export const register = async (req, res)=>{
+
 try {
     const user = await registerUser(req.body)
     res.status(401).json({
@@ -14,4 +15,20 @@ try {
         message: error.message
     })
 }
+}
+
+export const login = async(req, res)=>{
+    try {
+        const result = await loginUser(req.body)
+        res.status(200).json({
+            success: true,
+            message: "Login successfully",
+            data: result
+        })
+    } catch (error) {
+        res.status(500).json({
+            success:false,
+            error:error.message
+        })
+    }
 }

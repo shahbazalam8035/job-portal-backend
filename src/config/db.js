@@ -10,7 +10,7 @@ const connectMongo = async () => {
   }
 };
 
-const pool = new Pool({
+ const pgPool = new Pool({
   connectionString: process.env.POSTGRES_URI,
   ssl: {
     rejectUnauthorized: false,
@@ -19,11 +19,11 @@ const pool = new Pool({
 
 const connectPostgres = async () => {
   try {
-    await pool.connect();
+    await pgPool.connect();
     console.log('PostgreSQL Connected');
   } catch (err) {
     console.error('PostgreSQL Connection Error:', err);
   }
 };
 
-export { connectMongo, connectPostgres, pool };
+export { connectMongo, connectPostgres, pgPool };
