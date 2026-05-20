@@ -8,3 +8,11 @@ export const createJobRepo = async (data) => {
   );
   return rows[0];
 };
+
+export const getApplicationsByJobId = async (jobId)=>{
+   const { rows } = await pgPool.query(
+    `SELECT * FROM applications WHERE job_id = $1`,
+    [jobId]
+  );
+  return rows;
+}

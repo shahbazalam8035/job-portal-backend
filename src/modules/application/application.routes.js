@@ -5,11 +5,6 @@ import { applyJob } from "./application.controller.js";
 
 const Router = express();
 
-Router.post(
-  "/apply/:jobId",
-  authGuard,
-  roleGuard('applicant'),
-  applyJob
-);
+Router.post("/apply/:jobId",  authGuard, roleGuard('applicant'), applyJob );
 
 export default Router;
