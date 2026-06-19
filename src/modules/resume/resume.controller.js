@@ -1,9 +1,9 @@
 import { basicParse, extractText, parseResumeText } from "../../utils/resumeParser.js";
-import createResume from "../resume/resume.repository.js";
+import {createResume,getResumeById} from "../resume/resume.repository.js";
 import fs from "fs";
 import path from "path";
 
-const uploadResume = async (req, res) => {
+export const uploadResume = async (req, res) => {
     
     try {
         if (!req.file) {
@@ -31,4 +31,24 @@ const uploadResume = async (req, res) => {
 
 }
 
-export default uploadResume;
+export const getResumeDetails = async (req, res) => {
+  try {
+    const { resumeId } = req.params;
+
+    const resume = await getResumeById(resumeId);
+
+    if (!resume) {
+      return res.status(404).json({
+        success:false,
+        message: 'Resume not found',
+      });
+    }
+
+    res.status(200).json(resume);
+
+  } catch (err) {
+    res.status(400).json({
+      error: err.message,
+    });
+  }
+};
