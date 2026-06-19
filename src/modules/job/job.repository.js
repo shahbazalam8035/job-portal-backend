@@ -9,10 +9,30 @@ export const createJobRepo = async (data) => {
   return rows[0];
 };
 
-export const getApplicationsByJobId = async (jobId)=>{
+export const getApplicationsByJobId = async (
+  jobId,
+  limit,
+  offset
+)=>{
    const { rows } = await pgPool.query(
-    `SELECT * FROM applications WHERE job_id = $1`,
-    [jobId]
+    `SELECT * FROM applications
+     WHERE job_id = $1
+     ORDER BY applied_at DESC
+     LIMIT $2 OFFSET $3
+     `,
+    [jobId,limit,offset]
   );
   return rows;
+}
+
+export const getApplicationsCountByJob = async(
+  jobId
+)=>{
+const { rows } = await pgPool.query(
+    `SELECT * FROM applications
+     WHERE job_id = $1
+     `,
+    [jobId]
+  );
+  return rows.length;
 }
