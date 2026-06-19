@@ -5,6 +5,6 @@ import { createJob, getApplicationsForJob } from "./job.controller.js";
 
 const Router = express();
 Router.post('/create', authGuard, roleGuard('employer', 'admin'), createJob);
-Router.get('/:jobId/applications', authGuard, roleGuard('employer', 'admin'), getApplicationsForJob);
+Router.get('/:jobId/applicants', authGuard, roleGuard('employer', 'admin'), getApplicationsForJob);
 
 export default Router;

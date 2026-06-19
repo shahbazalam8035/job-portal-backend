@@ -6,7 +6,9 @@ export const createJob = async (req, res) => {
 };
  
 export const getApplicationsForJob = async (req,res)=>{
-  const applications = await getApplications(req.params);
+   const { jobId } = req.params;
+  const { skill } = req.query;
+  const applications = await getApplications(jobId,skill);
   res.status(200).json({success:true, data :applications})
 }
 
