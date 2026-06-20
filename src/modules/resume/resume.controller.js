@@ -14,6 +14,7 @@ export const uploadResume = async (req, res) => {
         const parsedData = basicParse(rawText);       
         const result = await createResume({
              userId: req.user.id,
+             resumeUrl: req.file.originalname,
              ...parsedData
         })
         res.status(201).json({

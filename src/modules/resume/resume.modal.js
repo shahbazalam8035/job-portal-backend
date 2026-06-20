@@ -5,6 +5,11 @@ import mongoose from "mongoose";
 const resumeSchema = new mongoose.Schema(
   {
     userId: Number,
+
+    resumeUrl: {
+      type: String,
+      required: true,
+    },
     
     name: {
       type: String,
