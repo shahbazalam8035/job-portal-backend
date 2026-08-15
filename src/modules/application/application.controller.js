@@ -3,7 +3,7 @@ import { createApplication, findJobById, findResumeByUserId } from "./applicatio
 export const applyJob = async (req,res)=>{
 try {
     const { jobId } = req.params;
-    const Job_Id = Number(jobId)
+    const Job_Id = Number(jobId);
     const userId = req.user.id;
 
     const job = await findJobById(Job_Id);

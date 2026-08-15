@@ -6,17 +6,18 @@ export const createJobServ = async (data, user) => {
 };
 
 export const getApplications = async ( jobId,skill,limit,page,) => {
-  console.log(jobId,skill,limit,page,"skillsss")
-  const offset = (page - 1) * limit;
+  const offset = (Number(page) - 1) * Number(limit)
   const applications = await getApplicationsByJobId(jobId,limit,offset);
-   const totalCount = await getApplicationsCountByJob(jobId);
-   console.log(totalCount,"total count-------------------")
+  const totalCount = await getApplicationsCountByJob(jobId);
   const applicantDetails = [];
 
+  console.log(applications,"all applications by jobId")
   for (const app of applications) {
     const resume = await Resume.findById(app.resume_id);
+    console.log(resume,"resumes all")
+    
 
-      if (!resume) continue;
+      // if (!resume) continue;
 
       if (
         skill &&
@@ -28,8 +29,8 @@ export const getApplications = async ( jobId,skill,limit,page,) => {
       }
 
     applicantDetails.push({
-      applied_at: app.applied_at,
-      user: resume
+      ...app,
+      user: resume || "Not found with resume id"
     })
   }
   return {applicantDetails,totalCount};

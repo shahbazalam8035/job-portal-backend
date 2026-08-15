@@ -14,3 +14,7 @@ export const getApplicationsForJob = async (req,res)=>{
   res.status(200).json({success:true,page:page,limit:limit, count:applications.totalCount, data:applications.applicantDetails,})
 }
 
+export const getAllJobs = async (req, res)=>{
+    res.status(200).json({success:true,data:{}})
+
+}

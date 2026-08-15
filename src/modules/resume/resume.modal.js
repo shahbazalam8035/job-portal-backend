@@ -55,5 +55,6 @@ const resumeSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
+console.log(mongoose.connection.name,"mongoose name")
 
 export const Resume = mongoose.model("Resume", resumeSchema);
